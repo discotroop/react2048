@@ -18,3 +18,4 @@ test('tiles double count on matched contact', () => {
     sample.contact(2);
     expect(sample.count).toBe(4);
 })
+test.todo('tiles move down on down')
