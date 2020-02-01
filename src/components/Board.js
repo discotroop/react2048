@@ -13,7 +13,7 @@ return {
     boardMap: drawBoard(),
     tiles: [],
     placeTile: function (y, x, tile) {
-        this.boardMap[y][x] = tile.count;
+        this.boardMap[y][x] = tile;
         tile.location[0] = y;
         tile.location[1] = x; 
     },

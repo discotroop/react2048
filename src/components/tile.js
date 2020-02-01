@@ -20,6 +20,9 @@ function Tile () {
             } else {
                 return;
             }
+        },
+        down: function () {
+            this.location = [3, 0];
         }
     }
 }
