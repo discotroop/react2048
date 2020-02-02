@@ -29,13 +29,16 @@ return {
     },
     moveTileLeft: function () {
         this.boardMap.forEach(function (row) {
-            for (let i = 0; i < row.length; i++) {
+            for (let i = 0; i < 3; i++) {
                 if (row[i] === 0) {
                     row.shift();
                     row.push(0);
                 }
             }
         })
+    },
+    moveTileDown: function () {
+     console.log("what to do")
     }
 
     }
