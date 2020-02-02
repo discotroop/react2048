@@ -17,8 +17,8 @@ test('Board can place tiles into boardMap', () => {
     sampleBoard.placeTile(0, 1, sampleTile);
     expect(sampleBoard.boardMap[0][1].count).toBe(sampleTile.count);
 })
-test('Board can move tiles down', () => {
+test('Board can move tiles right', () => {
     console.log(sampleBoard);
-    sampleBoard.down();
+    sampleBoard.right();
     expect(sampleBoard.boardMap[3][1].count).toBe(sampleTile.count);
 })
