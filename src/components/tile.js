@@ -14,6 +14,7 @@ function Tile () {
     return {
         count: randomize(),
         location: [0, 0],
+        moves: [],
         contact: function (TileToMatchCount) {
             if (TileToMatchCount === this.count) {
                 this.count += TileToMatchCount;

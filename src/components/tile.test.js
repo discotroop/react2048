@@ -18,8 +18,15 @@ test('tiles double count on matched contact', () => {
     sample.contact(2);
     expect(sample.count).toBe(4);
 })
-test('tiles move down on down in an empty array', () => {
-    sample.location = [0, 0];
-    sample.down();
-    expect(sample.location).toBe([3, 0]);
+test('tiles track legal moves', () => {
+    let result = function () {
+    if(sample.moves) {
+        result = true;
+    } else {
+        result = false;
+    }
+    return result;
+    }
+    let legal = result();
+    expect(legal).toBe(true);
 })

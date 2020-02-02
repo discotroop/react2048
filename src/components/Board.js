@@ -17,19 +17,31 @@ return {
         tile.location[0] = y;
         tile.location[1] = x; 
     },
-    down: function () {
-        for (let i = 2; i > -1; i--) {
-            let row = this.boardMap[i]
-            for (let j = 0; j < row.length; j++) {
-                let currentTile = row[j];
-                this.boardMap[3][j] = currentTile;
-                row[j] = 0;
+    moveTileRight: function () {
+        this.boardMap.forEach(function (row) {
+            for (let i = 4; i > 0; i--) {
+                if (row[i] === 0) {
+                    row.pop();
+                    row.unshift(0);
                 }
             }
-        }
+        })
+    },
+    moveTileLeft: function () {
+        this.boardMap.forEach(function (row) {
+            for (let i = 0; i < row.length; i++) {
+                if (row[i] === 0) {
+                    row.shift();
+                    row.push(0);
+                }
+            }
+        })
+    }
+
     }
 
 }
+
 
 
 
