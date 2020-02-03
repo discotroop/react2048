@@ -21,8 +21,15 @@ return {
     moveTileRight: function () {
         this.boardMap.forEach(function (row) {
             const filtered = row.filter(tile => tile.count > 0);
+
             const blankTile = Tile();
             blankTile.count = 0;
+
+            let mockRow = [blankTile, blankTile, blankTile, blankTile];
+            if (filtered.length === 1) {
+                mockRow[3] = filtered[0];
+            }
+
             if (filtered.length > 1) {
                 let prevIndex = filtered.length - 1;
                 let nextIndex = prevIndex - 1;
@@ -43,11 +50,12 @@ return {
 
                 }
             }
-            row = [blankTile, blankTile, blankTile, blankTile];
             for (let i = filtered.length - 1; i > -1; i--) {
                 row.shift();
                 row.push(filtered[i]);
             }
+            row = mockRow;
+            return row;
         })
     },
     moveTileLeft: function () {
