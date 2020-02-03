@@ -41,7 +41,9 @@ return {
                     if (prev.count === nexttile.count) {
                         nexttile.count += prev.count;
                         filtered.pop()
-                        prevIndex--
+                        prevIndex -= 2;
+                        console.log(filtered)
+
                         console.log(filtered[prevIndex])
                         nextIndex = prevIndex--;
                     } else {

@@ -70,7 +70,7 @@ describe('board can add tiles on right move', () => {
     expect(sampleBoard.boardMap[0][3].count).toBe(total);
 
     })
-    test('it adds 4 matching tiles in a row, two sets of two', () => {
+    test.only('it adds 4 matching tiles in a row, two sets of two', () => {
     let sampleBoard = Board();
     const tile1 = Tile();
     const tile2 = Tile();
