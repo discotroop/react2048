@@ -1,3 +1,4 @@
+import Tile from './tile.js'
 
 function Board () {
     function drawBoard () {
@@ -20,29 +21,32 @@ return {
     moveTileRight: function () {
         this.boardMap.forEach(function (row) {
             const filtered = row.filter(tile => tile.count > 0);
+            const blankTile = Tile();
+            blankTile.count = 0;
             if (filtered.length > 1) {
-                console.log(filtered)
                 let prevIndex = filtered.length - 1;
                 let nextIndex = prevIndex - 1;
                 let previous = filtered[prevIndex];
                 let nexttile = filtered[nextIndex];
                 while (nextIndex > -1) {
                     let prev = previous;
-                    console.log(prev)
 
                     if (prev.count === nexttile.count) {
                         nexttile.count += prev.count;
                         filtered.pop()
-                        console.log(filtered);
-                        nextIndex--;
+                        prevIndex--
+                        console.log(filtered[prevIndex])
+                        nextIndex = prevIndex--;
+                    } else {
+                        nextIndex--
                     }
+
                 }
             }
-            for (let i = 4; i > 0; i--) {
-                if (row[i] === 0) {
-                    row.pop();
-                    row.unshift(0);
-                }
+            row = [blankTile, blankTile, blankTile, blankTile];
+            for (let i = filtered.length - 1; i > -1; i--) {
+                row.shift();
+                row.push(filtered[i]);
             }
         })
     },

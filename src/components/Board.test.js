@@ -70,5 +70,26 @@ describe('board can add tiles on right move', () => {
     expect(sampleBoard.boardMap[0][3].count).toBe(total);
 
     })
+    test('it adds 4 matching tiles in a row, two sets of two', () => {
+    let sampleBoard = Board();
+    const tile1 = Tile();
+    const tile2 = Tile();
+    const tile3 = Tile();
+    const tile4 = Tile();
+    tile1.count = 2;
+    tile2.count = 2;
+    tile3.count = 2;
+    tile4.count = 2;
+    const total = 4;
+    sampleBoard.placeTile(0, 0, tile1)
+    sampleBoard.placeTile(0, 1, tile2)
+    sampleBoard.placeTile(0, 2, tile3)
+    sampleBoard.placeTile(0, 3, tile4)
+
+    sampleBoard.moveTileRight();
+    expect(sampleBoard.boardMap[0][3].count).toBe(total);
+    expect(sampleBoard.boardMap[0][2].count).toBe(total);
+
+    })
 
 })
