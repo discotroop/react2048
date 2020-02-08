@@ -15,50 +15,54 @@ return {
     tiles: [],
     placeTile: function (y, x, tile) {
         this.boardMap[y][x] = tile;
-        tile.location[0] = y;
-        tile.location[1] = x; 
+        // tile.location[0] = y;
+        // tile.location[1] = x; 
     },
-    moveTileRight: function () {
-        this.boardMap.forEach(function (row) {
-            const filtered = row.filter(tile => tile.count > 0);
+    filterNumberedTiles: function (row) {
+        return row.filter(tile => tile.count > 0);
+    },
 
-            const blankTile = Tile();
-            blankTile.count = 0;
+    moveTileRow: function (row) {
+        const that = this;
+        let filtered = that.filterNumberedTiles(row);
 
-            let mockRow = [blankTile, blankTile, blankTile, blankTile];
+        const blankTile = Tile();
+        blankTile.count = 0;
+        let mockRow = [blankTile, blankTile, blankTile, blankTile];
+            
             if (filtered.length === 1) {
                 mockRow[3] = filtered[0];
-            }
-
-            if (filtered.length > 1) {
+            } else if (filtered.length > 1) {
                 let prevIndex = filtered.length - 1;
                 let nextIndex = prevIndex - 1;
-                let previous = filtered[prevIndex];
-                let nexttile = filtered[nextIndex];
-                while (nextIndex > -1) {
-                    let prev = previous;
-
-                    if (prev.count === nexttile.count) {
-                        nexttile.count += prev.count;
-                        filtered.pop()
-                        prevIndex -= 2;
-                        console.log(filtered)
-
-                        console.log(filtered[prevIndex])
-                        nextIndex = prevIndex--;
+                let tempRow = mockRow;
+                do {
+                    if(filtered[prevIndex].count === filtered[nextIndex].count) {
+                        filtered[nextIndex].count += filtered[prevIndex].count;
+                        tempRow.shift();
+                        tempRow.push(filtered[nextIndex]);
+                        prevIndex = prevIndex - 2;
+                        nextIndex = prevIndex - 1;
                     } else {
-                        nextIndex--
+                        nextIndex--;
                     }
-
                 }
-            }
-            for (let i = filtered.length - 1; i > -1; i--) {
-                row.shift();
-                row.push(filtered[i]);
+                while (nextIndex > -1) 
+                mockRow = tempRow;
             }
             row = mockRow;
             return row;
+    },
+    moveTileRight() {
+        let that = this;
+        let passingArr = this.boardMap;
+        passingArr.forEach((row) => {
+            row = that.moveTileRow(row);
+            console.log(passingArr[0]);
+            return row;
         })
+        console.log(passingArr);
+        this.boardMap = passingArr;
     },
     moveTileLeft: function () {
         this.boardMap.forEach(function (row) {
