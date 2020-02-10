@@ -34,7 +34,6 @@ return {
         return array;
     },
     makeVerticalRows: function (arr) {
-        let newTile = () => Tile(0);
         let mockArr = [[], [], [], []];
         arr.forEach(function(array) {
             array.forEach(function(tile, index) {

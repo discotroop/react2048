@@ -237,8 +237,8 @@ describe('MOVE UP', () => {
     sampleBoard.placeTile(2, 1, tile3)
     sampleBoard.placeTile(3, 1, tile4)
     
-    sampleBoard.moveTileDown();
-    expect(sampleBoard.boardMap[3][1].count).toBe(total);
-    expect(sampleBoard.boardMap[2][1].count).toBe(total);
+    sampleBoard.moveTileUp();
+    expect(sampleBoard.boardMap[0][1].count).toBe(total);
+    expect(sampleBoard.boardMap[1][1].count).toBe(total);
     })
 })
