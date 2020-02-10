@@ -23,16 +23,11 @@ test('Board can place tiles into boardMap', () => {
     expect(sampleBoard.boardMap[0][1].count).toBe(sampleTile.count);
 })
 
-test('moveTileRow, can handle single tile rows') {
-    /// do this!
-    sample
-}
 
 // Move single tiles
 test('Board can move tiles right', () => {
-    // move to splice ?
     let sampleBoard = Board();
-    const tile = Tile();
+    let tile = Tile();
     const count = tile.count;
     sampleBoard.placeTile(0, 1, tile)
 
@@ -47,8 +42,7 @@ test('Board can move tiles left', () => {
 
     sampleBoard.moveTileLeft();
     expect(sampleBoard.boardMap[0][0].count).toBe(count);
-
-})
+});
 test.skip('Board can move tiles down', () => {
     let sampleBoard = Board();
     const tile = Tile();
@@ -57,25 +51,57 @@ test.skip('Board can move tiles down', () => {
 
     sampleBoard.moveTileDown();
     expect(sampleBoard.boardMap[3][3].count).toBe(count);
+});
+
+test('MoveTileRow can handle two matching tiles', () => {
+    let sampleBoard = Board();
+    let tile = Tile();
+    let tile2 = Tile();
+    tile.count = 2;
+    tile2.count = 2;
+    sampleBoard.placeTile(0, 3, tile);
+    sampleBoard.placeTile(0, 2, tile2);
+    let sampleRow = sampleBoard.boardMap[0];
+    sampleRow = sampleBoard.moveTileRow(sampleRow);
+    expect(sampleRow[3].count).toBe(4);
+});
+test('MoveTileRow can handle two sets of matching tiles', () => {
+    let sampleBoard = Board();
+    let tile = new Tile();
+    let tile2 = new Tile();
+    let tile3 = new Tile();
+    let tile4 = new Tile();
+    tile.count = 2;
+    tile2.count = 2;
+    tile3.count = 4;
+    tile4.count = 4;
+    sampleBoard.placeTile(0, 3, tile);
+    sampleBoard.placeTile(0, 2, tile2);
+    sampleBoard.placeTile(0, 1, tile3);
+    sampleBoard.placeTile(0, 0, tile4);
+    let sampleRow = sampleBoard.boardMap[0];
+    sampleRow = sampleBoard.moveTileRow(sampleRow);
+    expect(sampleRow[3].count).toBe(4);
+    expect(sampleRow[2].count).toBe(8);
 })
+
 
 // Add tiles 
 describe('board can add tiles on right move', () => {
     test("it adds two matching tiles in a row", () => {
     let sampleBoard = Board();
-    const tile1 = Tile();
-    const tile2 = Tile();
+    let tile1 = Tile();
+    let tile2 = Tile();
     tile1.count = 2;
     tile2.count = 2;
-    const total = 4;
     sampleBoard.placeTile(0, 1, tile1)
     sampleBoard.placeTile(0, 3, tile2)
 
     sampleBoard.moveTileRight();
-    expect(sampleBoard.boardMap[0][3].count).toBe(total);
+    expect(sampleBoard.boardMap[0][3].count).toBe(4);
 
     })
-    test.only('it adds 4 matching tiles in a row, two sets of two', () => {
+    test('it adds 4 matching tiles in a row, two sets of two', () => {
     let sampleBoard = Board();
     let tile1 = Tile();
     let tile2 = Tile();
@@ -91,9 +117,7 @@ describe('board can add tiles on right move', () => {
     sampleBoard.placeTile(0, 2, tile3)
     sampleBoard.placeTile(0, 3, tile4)
     
-    console.log(sampleBoard.boardMap)
     sampleBoard.moveTileRight();
-    console.log(sampleBoard.boardMap)
     expect(sampleBoard.boardMap[0][3].count).toBe(total);
     expect(sampleBoard.boardMap[0][2].count).toBe(total);
 

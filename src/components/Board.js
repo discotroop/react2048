@@ -21,48 +21,57 @@ return {
     filterNumberedTiles: function (row) {
         return row.filter(tile => tile.count > 0);
     },
+    // tileMatch: function (a, b) {
+    //     if (a.count === b.count) {
+    //         a.count += b.count;
+    //         console.log(a.count);
+    //         return a.count;
+    //     } else {
+    //         return false;
+    //     }
+    // },
+    checkMatches: function (array) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].count === array[i + 1].count) {
+                array[i].count += array[i + 1].count;
+                array[i + 1].count = 0; 
+                i++
+            }
+        }
+        array = this.filterNumberedTiles(array);
+        return array;
+    },
 
     moveTileRow: function (row) {
         const that = this;
         let filtered = that.filterNumberedTiles(row);
 
-        const blankTile = Tile();
+        let blankTile = () => Tile(0);
         blankTile.count = 0;
+
         let mockRow = [blankTile, blankTile, blankTile, blankTile];
             
-            if (filtered.length === 1) {
-                mockRow[3] = filtered[0];
-            } else if (filtered.length > 1) {
-                let prevIndex = filtered.length - 1;
-                let nextIndex = prevIndex - 1;
-                let tempRow = mockRow;
-                do {
-                    if(filtered[prevIndex].count === filtered[nextIndex].count) {
-                        filtered[nextIndex].count += filtered[prevIndex].count;
-                        tempRow.shift();
-                        tempRow.push(filtered[nextIndex]);
-                        prevIndex = prevIndex - 2;
-                        nextIndex = prevIndex - 1;
-                    } else {
-                        nextIndex--;
-                    }
-                }
-                while (nextIndex > -1) 
-                mockRow = tempRow;
-            }
+        if (filtered.length === 1) {
+
+            mockRow[3] = filtered[0];
             row = mockRow;
+            return row;
+        } else if (filtered.length > 1) {
+            filtered.reverse();
+            filtered = this.checkMatches(filtered);
+            
+            while (filtered.length < 4) {
+                filtered.push(blankTile());
+            }
+            filtered.reverse();
+            }
+            row = filtered;
             return row;
     },
     moveTileRight() {
-        let that = this;
-        let passingArr = this.boardMap;
-        passingArr.forEach((row) => {
-            row = that.moveTileRow(row);
-            console.log(passingArr[0]);
-            return row;
-        })
-        console.log(passingArr);
-        this.boardMap = passingArr;
+        for (let i = 0; i < this.boardMap.length; i++) {
+            this.boardMap[i] = this.moveTileRow(this.boardMap[i]);
+        }
     },
     moveTileLeft: function () {
         this.boardMap.forEach(function (row) {

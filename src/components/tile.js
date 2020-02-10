@@ -1,8 +1,9 @@
 
-function Tile () {
+function Tile (count) {
     function randomize() {
-        let randomFloat = Math.random();
         let result = 0;
+        let randomFloat = Math.random();
+
         if (randomFloat > 0.5) {
             result = 4;
         } else {
@@ -10,9 +11,16 @@ function Tile () {
         }
         return result;
     }
+    let theCount = 0;
+    
+    if (arguments.length > 0) {
+        theCount = count;
+    } else {
+        theCount = randomize();
+    }
 
     return {
-        count: randomize(),
+        count: theCount,
         // location: [0, 0],
         moves: [],
         contact: function (TileToMatchCount) {
