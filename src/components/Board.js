@@ -34,7 +34,8 @@ return {
         return array;
     },
     makeVerticalRows: function (arr) {
-        let mockArr = [[],[],[],[]];
+        let newTile = () => Tile(0);
+        let mockArr = [[], [], [], []];
         arr.forEach(function(array) {
             array.forEach(function(tile, index) {
                 mockArr[index].push(tile);
@@ -45,9 +46,11 @@ return {
     moveTileRow: function (row) {
         let filtered = this.filterNumberedTiles(row);
         let blankTile = () => Tile(0);
-        let mockRow = [blankTile, blankTile, blankTile, blankTile];
-            
-        if (filtered.length === 1) {
+        let mockRow = [blankTile(), blankTile(), blankTile(), blankTile()];
+        
+        if (filtered.length === 0) {
+            return row;
+        } else if (filtered.length === 1) {
             mockRow[3] = filtered[0];
             row = mockRow;
             return row;
@@ -75,18 +78,20 @@ return {
     },
     moveTileDown: function () {
         let workingArr = this.makeVerticalRows(this.boardMap);
-        for (let i = 1; i < 2; i++) {
+        for (let i = 1; i < workingArr.length; i++) {
             workingArr[i] = this.moveTileRow(workingArr[i]);
         }
         this.boardMap = this.makeVerticalRows(workingArr)
     },
     moveTileUp: function () {
-        // let workingArr = this.makeVerticalRows(this.boardMap);
-        // for (let i = 0; i < workingArr.length; i++) {
-        //     workingArr[i] = this.moveTileRow(workingArr[i]);
-        // }
-        // this.boardMap = this.makeVerticalRows(workingArr.reverse())
-        console.log("up")
+        let workingArr = this.makeVerticalRows(this.boardMap);
+        for (let i = 0; i < workingArr.length; i++) {
+            let reversed = workingArr[i].reverse();
+            workingArr[i] = this.moveTileRow(reversed);
+            workingArr[i].reverse();
+        }
+        this.boardMap = this.makeVerticalRows(workingArr);
+        console.log(this.boardMap)
     }
 
 }
