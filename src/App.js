@@ -2,14 +2,14 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Board from './components/Board.js'
-
-let game = Board();
+import Game from './components/game.js'
 
 function App() {
   return (
     <div className="App">
       <div> testing </div>
       <TestingArr board={Board()}> </TestingArr>
+      {Game()}
     </div>
   );
 }
@@ -38,7 +38,7 @@ class TestingArr extends React.Component {
     })
 
     return (
-      <div className="2048">
+      <div className="board">
         {tileArr}
       </div>
     )
@@ -48,7 +48,9 @@ class TestingArr extends React.Component {
     return (
     <div> 
       <div> {console.log(this.state.game)} hello
-      {this.drawBoard()}
+       </div>
+       <div>
+       {this.drawBoard()}
        </div>
     </div>
   
