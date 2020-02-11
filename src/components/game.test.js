@@ -32,6 +32,34 @@ describe('check last tile looks for game ending moves', () =>  {
         let sampleGame = Game();
         let edge = sampleGame.checkMoveRight(2, 0, 3)
         expect(edge).toBe(false);
+    });
+    test('checkMoveLeft returns false when on the edge', () => {
+        let sampleGame = Game();
+        let edge = sampleGame.checkMoveLeft(2, 0, 0)
+        expect(edge).toBe(false);
+    });
+    test('checkMoveDownreturns false when on the edge', () => {
+        let sampleGame = Game();
+        let edge = sampleGame.checkMoveDown(2, 3, 3)
+        expect(edge).toBe(false);
+    });
+    test('checkMoveUp returns false when on the edge', () => {
+        let sampleGame = Game();
+        let edge = sampleGame.checkMoveUp(2, 0, 0)
+        expect(edge).toBe(false);
+    });
+})
 
-    })
+describe('checkWin, checks for winning counts', () => {
+    test('TEMP returns 1 on finding 2048', () => {
+        let sampleGame = Game();
+        sampleGame.board.boardMap[0][0].count = 2048;
+        let result = sampleGame.checkWin()
+        expect(result).toBe(1);
+    });
+    test('TEMP returns 0 on no 2048', () => {
+        let sampleGame = Game();
+        let result = sampleGame.checkWin()
+        expect(result).toBe(0);
+    });
 })

@@ -33,7 +33,7 @@ function Game () {
                 this.newestTile[1] = y;
             }
         },
-        
+
         /* move checks for final tile at end game */
         checkMoveRight: function (count, x, y) {
             let rightMove = this.board.boardMap[x][y + 1];
@@ -97,9 +97,7 @@ function Game () {
             }
         },
         /* end move checks */
-
-        checkLoss: function () {
-            let loss = false;
+        filterTiles: function () {
             let tiles = []
             this.board.boardMap.forEach((arr) => {
                 arr.forEach((tile) => {
@@ -108,6 +106,12 @@ function Game () {
                     }
                 });
             });
+            return tiles;
+        },
+
+        checkLoss: function () {
+            let loss = false;
+            let tiles = this.filterTiles();
             if (tiles.length < 16) {
                 return loss;
             } else if (this.checkLastTile() === true) {
@@ -116,7 +120,19 @@ function Game () {
                 loss = true;
                 return loss;
             }
-        }   
+        }, 
+        checkWin: function () {
+            let tiles = this.filterTiles();
+            let winner = tiles.filter(tile => tile.count === 2048)
+            if (winner.length > 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        },
+        newGame: function () {
+            this.board = Board();
+        }
 }
 }
 
