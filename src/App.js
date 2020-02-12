@@ -11,9 +11,38 @@ function App() {
     <div className="App">
       <div> testing </div>
       <TestingArr game={game} board={board}> </TestingArr>
+      <TestingState />
     </div>
   );
 }
+class TestingState extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+  countUp() {
+    let added = this.state.count;
+    let adder = added + 1;
+    this.setState({count: adder})
+  }
+
+  render () {
+    return (<div className="testState" onClick={this.countUp()}> {this.state.count} </div>)
+  }
+}
+class propsUpdate extends React.Component {
+  constructor(props) {
+    super(props); 
+    this.state = {};
+  }
+  render() {
+    return (<div className="propsUpdate"> {this.props.count} </div> )
+  }
+}
+
+
 class Tile extends React.Component {
   constructor(props) {
     super(props);
@@ -42,15 +71,15 @@ class TestingArr extends React.Component {
   // }
   drawBoard() {
     let tileArr = []
-    this.state.game.placeTile();
-    let tileRows = this.state.game.board.boardMap;
+    this.props.game.placeTile();
+    let tileRows = this.props.game.board.boardMap;
 
     tileRows.forEach((row, index) => {
       let that = this
       let x = index;
       row.forEach((tile, index) => {
         let y = index;
-        tileArr.push(<Tile count={that.state.game.board.boardMap[x][y].count}></Tile>);
+        tileArr.push(<Tile count={that.props.game.board.boardMap[x][y].count}></Tile>);
       })
     })
 
@@ -63,25 +92,28 @@ class TestingArr extends React.Component {
   up () {
     console.log("up");
     this.props.game.board.moveTileUp();
-      console.log(this.props.game.board.boardMap)
-      console.log(this.state.board.boardMap);
+    console.log(this.props.game.board.boardMap)
+    this.props.game.placeTile();
   }
   down () {
     console.log("down")
     this.props.game.board.moveTileDown();
     console.log(this.props.game.board.boardMap)
+    this.props.game.placeTile();
 
   }
   left () {
     console.log("left")
     this.props.game.board.moveTileLeft();
     console.log(this.props.game.board.boardMap)
+    this.props.game.placeTile();
 
   }
   right () {
     console.log("right")
     this.props.game.board.moveTileRight();
     console.log(this.props.game.board.boardMap)
+    this.props.game.placeTile();
 
   }
   handleKeyPress = (key) => {
@@ -107,7 +139,7 @@ class TestingArr extends React.Component {
   render() {
     return (
     <div> 
-      <div> {console.log(this.state.game)} hello
+      <div> {console.log(this.props.game)} hello
        </div>
        <div>
        {this.drawBoard()}
