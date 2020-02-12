@@ -132,6 +132,8 @@ function Game () {
         },
         newGame: function () {
             this.board = Board();
+            // this.placeTile();
+            // window.addEventListener(keyup, function() {})
         }
 }
 }

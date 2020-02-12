@@ -24,7 +24,10 @@ return {
     },
     checkMatches: function (array) {
         for (let i = 0; i < array.length; i++) {
-            if (array[i].count === array[i + 1].count) {
+            if (array[i + 1] === undefined) {
+                array = this.filterNumberedTiles(array);
+                return array;
+            } else if (array[i].count === array[i + 1].count) {
                 array[i].count += array[i + 1].count;
                 array[i + 1].count = 0; 
                 i++

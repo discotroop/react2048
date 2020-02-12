@@ -1,15 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Board from './components/Board.js'
+// import Board from './components/Board.js'
 import Game from './components/game.js'
+
+const game = Game()
+let board = game.board;
 
 function App() {
   return (
     <div className="App">
       <div> testing </div>
-      <TestingArr board={Board()}> </TestingArr>
-      {Game()}
+      <TestingArr game={game} board={board}> </TestingArr>
     </div>
   );
 }
@@ -18,18 +19,20 @@ class TestingArr extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      game: props.board,
+      game: props.game,
       test: "react 2048"
     }
   }
+  // Make this a react props function and state should pass down!
   drawTile(count, index) {
     return (
-      <div className="tile"> {count}  index {index} </div>
+      <div className="tile"> {count} </div>
     )
   }
   drawBoard() {
     let tileArr = []
-    let tileRows = this.state.game.boardMap;
+    this.state.game.placeTile();
+    let tileRows = this.state.game.board.boardMap;
 
     tileRows.forEach((row) => {
       row.forEach((tile, index) => {
@@ -42,6 +45,49 @@ class TestingArr extends React.Component {
         {tileArr}
       </div>
     )
+  }
+  up () {
+    console.log("up");
+    this.props.game.board.moveTileUp();
+      console.log(this.props.game.board.boardMap)
+      this.drawBoard();
+  }
+  down () {
+    console.log("down")
+    this.props.game.board.moveTileDown();
+    console.log(this.props.game.board.boardMap)
+
+  }
+  left () {
+    console.log("left")
+    this.props.game.board.moveTileLeft();
+    console.log(this.props.game.board.boardMap)
+
+  }
+  right () {
+    console.log("right")
+    this.props.game.board.moveTileRight();
+    console.log(this.props.game.board.boardMap)
+
+  }
+  handleKeyPress = (key) => {
+    if (key === "ArrowUp") {
+      this.up();
+    } else if (key === "ArrowDown") {
+      this.down();
+    } else if (key === "ArrowLeft") {
+      this.left();
+    } else if (key === "ArrowRight") {
+      this.right();
+    } else {
+      return;
+    }
+  }
+  handleEvents() {
+    window.addEventListener('keyup' , (e) => this.handleKeyPress(e.key));
+  }
+  componentDidMount() {
+    this.handleEvents();
   }
 
   render() {
