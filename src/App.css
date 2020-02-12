@@ -15,9 +15,21 @@
 
 .tile {
   background-color: green;
-  height: 60px;
-  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   border-style: solid;
   border-width: 2px;
   border-color: white;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testState {
+  width: 40px;
+  height: 40px;
+  background-color: green;
+  text-align: center;
+  font-weight: 20px;
 }

@@ -29,9 +29,9 @@ function Game () {
                 this.board.placeTile(x, y, Tile());
             } else {
                 this.placeTile();
-                this.newestTile[0] = x;
-                this.newestTile[1] = y;
             }
+            this.newestTile[0] = x;
+            this.newestTile[1] = y;
         },
 
         /* move checks for final tile at end game */

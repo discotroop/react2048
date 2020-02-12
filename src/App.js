@@ -21,18 +21,19 @@ class TestingState extends React.Component {
     this.state = {
       count: 0
     }
+    this.handleClick = this.handleClick.bind(this)
   }
-  countUp() {
-    let added = this.state.count;
-    let adder = added + 1;
-    this.setState({count: adder})
-  }
-
+ handleClick() {
+   let newCount = this.state.count + 1;
+   this.setState(state => ({
+     count: newCount
+   }));
+ }
   render () {
-    return (<div className="testState" onClick={this.countUp()}> {this.state.count} </div>)
+    return (<div className="testState" onClick={this.handleClick}> <PropsUpdate count={this.state.count} /> </div>)
   }
 }
-class propsUpdate extends React.Component {
+class PropsUpdate extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {};
@@ -63,23 +64,18 @@ class TestingArr extends React.Component {
       board: game.board,
       test: "react 2048"
     }
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
-  // drawTile(count, index) {
-  //   return (
-  //     <div className="tile"> {count} </div>
-  //   )
-  // }
   drawBoard() {
     let tileArr = []
-    this.props.game.placeTile();
-    let tileRows = this.props.game.board.boardMap;
+    let tileRows = this.state.game.board.boardMap;
 
     tileRows.forEach((row, index) => {
       let that = this
       let x = index;
       row.forEach((tile, index) => {
         let y = index;
-        tileArr.push(<Tile count={that.props.game.board.boardMap[x][y].count}></Tile>);
+        tileArr.push(<Tile count={that.state.game.board.boardMap[x][y].count}></Tile>);
       })
     })
 
@@ -90,30 +86,30 @@ class TestingArr extends React.Component {
     )
   }
   up () {
-    console.log("up");
     this.props.game.board.moveTileUp();
-    console.log(this.props.game.board.boardMap)
     this.props.game.placeTile();
+    this.setState(state => ({
+    }))
   }
   down () {
-    console.log("down")
     this.props.game.board.moveTileDown();
-    console.log(this.props.game.board.boardMap)
     this.props.game.placeTile();
+    this.setState(state => ({
+    }))
 
   }
   left () {
-    console.log("left")
     this.props.game.board.moveTileLeft();
-    console.log(this.props.game.board.boardMap)
     this.props.game.placeTile();
+    this.setState(state => ({
+    }))
 
   }
   right () {
-    console.log("right")
     this.props.game.board.moveTileRight();
-    console.log(this.props.game.board.boardMap)
     this.props.game.placeTile();
+    this.setState(state => ({
+    }))
 
   }
   handleKeyPress = (key) => {
@@ -130,7 +126,7 @@ class TestingArr extends React.Component {
     }
   }
   handleEvents() {
-    window.addEventListener('keyup' , (e) => this.handleKeyPress(e.key));
+    window.addEventListener('keydown' , (e) => this.handleKeyPress(e.key));
   }
   componentDidMount() {
     this.handleEvents();
@@ -139,7 +135,7 @@ class TestingArr extends React.Component {
   render() {
     return (
     <div> 
-      <div> {console.log(this.props.game)} hello
+      <div>  hello
        </div>
        <div>
        {this.drawBoard()}
