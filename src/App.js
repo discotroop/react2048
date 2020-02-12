@@ -10,40 +10,10 @@ function App() {
   return (
     <div className="App">
       <div> testing </div>
-      <TestingArr game={game} board={board}> </TestingArr>
-      <TestingState />
+      <GameBox game={game} board={board}> </GameBox>
     </div>
   );
 }
-class TestingState extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
- handleClick() {
-   let newCount = this.state.count + 1;
-   this.setState(state => ({
-     count: newCount
-   }));
- }
-  render () {
-    return (<div className="testState" onClick={this.handleClick}> <PropsUpdate count={this.state.count} /> </div>)
-  }
-}
-class PropsUpdate extends React.Component {
-  constructor(props) {
-    super(props); 
-    this.state = {};
-  }
-  render() {
-    return (<div className="propsUpdate"> {this.props.count} </div> )
-  }
-}
-
-
 class Tile extends React.Component {
   constructor(props) {
     super(props);
@@ -51,12 +21,73 @@ class Tile extends React.Component {
       count: props.count
     }
   }
+  findTileStyle () {
+    let count = this.props.count;
+    let result = String;
+
+    switch(count) {
+      case 2:
+      result = "two";
+      console.log(result)
+      break;
+
+      case 4:
+      result = "four";
+      break; 
+
+      case 8:
+        result = "eight";
+      break;
+
+      case 16:
+        result = "sixteen";
+      break;
+
+      case 32:
+        result = "thirtytwo";
+      break;
+
+      case 64:
+        result = "sixtyfour";
+      break;
+
+      case 128:
+        result = "onetwentyeight";
+      break;
+
+      case 256:
+        result = "twofiftysix";
+      break;
+
+      case 512:
+        result = "fivetwelve";
+      break;
+
+      case 1024:
+        result = "tentwofour";
+      break;
+
+      case 2048:
+        result = "2048";
+      break;
+      
+      default: 
+      result = "zero"
+      break;
+    }
+    return result;
+  }
+
+  setClassNames() {
+    let result = "tile " + this.findTileStyle();
+    return result;
+  }
+
   render() {
-    return ( <div className="tile"> {this.props.count} </div>)
+    return ( <div className={this.setClassNames()}> {this.props.count} </div>)
   }
 }
-
-class TestingArr extends React.Component {
+class GameBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,7 +109,6 @@ class TestingArr extends React.Component {
         tileArr.push(<Tile count={that.state.game.board.boardMap[x][y].count}></Tile>);
       })
     })
-
     return (
       <div className="board">
         {tileArr}
@@ -96,21 +126,18 @@ class TestingArr extends React.Component {
     this.props.game.placeTile();
     this.setState(state => ({
     }))
-
   }
   left () {
     this.props.game.board.moveTileLeft();
     this.props.game.placeTile();
     this.setState(state => ({
     }))
-
   }
   right () {
     this.props.game.board.moveTileRight();
     this.props.game.placeTile();
     this.setState(state => ({
     }))
-
   }
   handleKeyPress = (key) => {
     if (key === "ArrowUp") {
@@ -131,7 +158,6 @@ class TestingArr extends React.Component {
   componentDidMount() {
     this.handleEvents();
   }
-
   render() {
     return (
     <div> 

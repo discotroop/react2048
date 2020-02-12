@@ -96,6 +96,7 @@ function Game () {
                 return hasMove;
             }
         },
+
         /* end move checks */
         filterTiles: function () {
             let tiles = []
@@ -108,7 +109,6 @@ function Game () {
             });
             return tiles;
         },
-
         checkLoss: function () {
             let loss = false;
             let tiles = this.filterTiles();
@@ -132,8 +132,6 @@ function Game () {
         },
         newGame: function () {
             this.board = Board();
-            // this.placeTile();
-            // window.addEventListener(keyup, function() {})
         }
 }
 }

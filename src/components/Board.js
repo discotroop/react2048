@@ -16,8 +16,6 @@ return {
     tiles: [],
     placeTile: function (y, x, tile) {
         this.boardMap[y][x] = tile;
-        // tile.location[0] = y;
-        // tile.location[1] = x; 
     },
     filterNumberedTiles: function (row) {
         return row.filter(tile => tile.count > 0);
@@ -95,7 +93,6 @@ return {
         this.boardMap = this.makeVerticalRows(workingArr);
         return this.boardMap;
     },
-
 }
 
 }
