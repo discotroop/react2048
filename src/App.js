@@ -14,29 +14,43 @@ function App() {
     </div>
   );
 }
+class Tile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: props.count
+    }
+  }
+  render() {
+    return ( <div className="tile"> {this.props.count} </div>)
+  }
+}
 
 class TestingArr extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       game: props.game,
+      board: game.board,
       test: "react 2048"
     }
   }
-  // Make this a react props function and state should pass down!
-  drawTile(count, index) {
-    return (
-      <div className="tile"> {count} </div>
-    )
-  }
+  // drawTile(count, index) {
+  //   return (
+  //     <div className="tile"> {count} </div>
+  //   )
+  // }
   drawBoard() {
     let tileArr = []
     this.state.game.placeTile();
     let tileRows = this.state.game.board.boardMap;
 
-    tileRows.forEach((row) => {
+    tileRows.forEach((row, index) => {
+      let that = this
+      let x = index;
       row.forEach((tile, index) => {
-        tileArr.push(this.drawTile(tile.count, index));
+        let y = index;
+        tileArr.push(<Tile count={that.state.game.board.boardMap[x][y].count}></Tile>);
       })
     })
 
@@ -50,7 +64,7 @@ class TestingArr extends React.Component {
     console.log("up");
     this.props.game.board.moveTileUp();
       console.log(this.props.game.board.boardMap)
-      this.drawBoard();
+      console.log(this.state.board.boardMap);
   }
   down () {
     console.log("down")
