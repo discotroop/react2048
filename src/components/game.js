@@ -25,7 +25,10 @@ function Game () {
         placeTile: function () {
             let x = this.random();
             let y = this.random();
-            if (this.board.boardMap[x][y].count < 2) {
+            let tiles = this.filterTiles()
+            if (tiles.length === 16) {
+                return;
+            } else if (this.board.boardMap[x][y].count < 2) {
                 this.board.placeTile(x, y, Tile());
             } else {
                 this.placeTile();
@@ -56,29 +59,29 @@ function Game () {
             }
         },
         checkMoveDown: function(count, x, y) {
-            let downMove = this.board.boardMap[x -1 ][y];
-            if (downMove === undefined) {
+            if (x === 0) {
                 return false;
-            } else if (downMove.count === count) {
-                return true;
             } else {
-                return false;
+                let downMove = this.board.boardMap[x - 1][y];
+                if (downMove.count === count) {
+                    return true
+                } else {return false} 
             }
         },
         checkMoveUp: function(count, x, y) {
-            let downMove = this.board.boardMap[x + 1][y];
-            if (downMove === undefined) {
+            if (x === 3) {
                 return false;
-            } else if (downMove.count === count) {
-                return true;
             } else {
+                let upMove = this.board.boardMap[x + 1][y];
+                if (upMove.count === count) {
+                    return true
+                } else {
                 return false;
             }
+        }
         },
-        checkLastTile: function () {
+        tileHasMove: function (x, y) {
             let hasMove = false;
-            let x = this.newestTile[0];
-            let y = this.newestTile[1];
             let count = this.board.boardMap[x][y].count;
             if (this.checkMoveRight(count, x, y) === true) {
                 hasMove = true;
@@ -96,6 +99,17 @@ function Game () {
                 return hasMove;
             }
         },
+        anyTileHasMove() {
+            for(let i = 0; i < this.board.boardMap.length; i++) {
+                for(let j = 0; j <this.board.boardMap[i].length; j++) {
+                    let result = this.tileHasMove(i, j);
+                    if (result === true) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
 
         /* end move checks */
         filterTiles: function () {
@@ -109,12 +123,15 @@ function Game () {
             });
             return tiles;
         },
-        checkLoss: function () {
+        // Should see if there are no legal moves, returns true if no moves false if there are moves
+        hasLost: function () {
             let loss = false;
             let tiles = this.filterTiles();
             if (tiles.length < 16) {
                 return loss;
-            } else if (this.checkLastTile() === true) {
+            } else if (this.anyTileHasMove() === true) {
+                // if any tile can move return false;
+                console.log(" has lost",  loss)
                 return loss;
             } else {
                 loss = true;

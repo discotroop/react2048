@@ -128,6 +128,9 @@ class GameBox extends React.Component {
     }))
   }
   handleKeyPress = (key) => {
+    if (this.props.game.hasLost() === true)
+      {console.log("loser")
+      return; }
     if (key === "ArrowUp") {
       this.up();
     } else if (key === "ArrowDown") {

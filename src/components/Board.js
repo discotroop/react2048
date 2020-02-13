@@ -99,7 +99,6 @@ return {
             workingArr[i] = this.moveTileRow(workingArr[i]);
         }
         this.boardMap = this.makeVerticalRows(workingArr)
-        console.log(this.boardMap)
     },
     moveTileUp: function () {
         let workingArr = this.makeVerticalRows(this.boardMap);
