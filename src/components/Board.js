@@ -2,15 +2,32 @@ import Tile from './tile.js'
 
 function Board () {
     let newTile = () => Tile(0);
+    function random () {
+        let randomFloat = Math.random();
+        let result = 0;
+
+        if (randomFloat < 0.25) {
+            result = 0;
+        } else if (randomFloat < 0.5) {
+            result = 1;
+        } else if (randomFloat < 0.75) {
+            result = 2;
+        } else {
+            result = 3;
+        }
+        return result;
+    }
     function drawBoard () {
         let result = []
+        let x = random();
+        let y = random();
         let xArr = () => [newTile(), newTile(), newTile(), newTile()];
         for (let i = 0; i < 4; i++) {
             result.push(xArr());
         }
+        result[x][y] = Tile();
         return result;
     }
-
 return {
     boardMap: drawBoard(),
     tiles: [],
@@ -78,10 +95,11 @@ return {
     },
     moveTileDown: function () {
         let workingArr = this.makeVerticalRows(this.boardMap);
-        for (let i = 1; i < workingArr.length; i++) {
+        for (let i = 0; i < workingArr.length; i++) {
             workingArr[i] = this.moveTileRow(workingArr[i]);
         }
         this.boardMap = this.makeVerticalRows(workingArr)
+        console.log(this.boardMap)
     },
     moveTileUp: function () {
         let workingArr = this.makeVerticalRows(this.boardMap);

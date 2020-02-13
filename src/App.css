@@ -1,5 +1,5 @@
 .board {
-  background-color: blue;
+  background-color: #776e65;;
   display: grid;
   grid-template-columns: repeat(4, 60px);
   grid-template-rows: repeat(4, 60px);
@@ -11,19 +11,18 @@
   justify-content: center;
   align-content: center;
   text-align: center;
+  border-radius: 3px;
 }
 
 .tile {
-  background-color: green;
+  background-color: #bbada0;
   min-height: 60px;
   min-width: 60px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: white;
   font-size: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 3px;
 }
 
 .testState {
@@ -32,4 +31,57 @@
   background-color: green;
   text-align: center;
   font-weight: 20px;
+}
+
+.zero {
+  /* color: #776e65; */
+  color: #bbada0;
+  background-color: #bbada0;
+}
+.two {
+  background-color:#eee4da;
+}
+.four {
+  background-color: #ede0c8;
+}
+.eight {
+  color: #f9f6f2;
+  background-color: #f2b179;
+}
+.sixteen {
+  color: #f9f6f2;
+  background-color: #f59563; 
+}
+.thirtytwo {
+  color: #f9f6f2;
+  background: #f67c5f;
+}
+.sixtyfour {
+  color: #f9f6f2;
+  background: #f65e3b; 
+}
+.onetwentyeight {
+  color: #f9f6f2;
+  background: #edcf72
+  /* change font-size; */
+}
+.twofiftysix {
+  color: #f9f6f2;
+  background: #edcc61;
+  /* change font size  */
+}
+.fivetwelve {
+  color: #f9f6f2;
+  background: #edc850;
+  /* change font size  */
+}
+.tentwentyfour {
+  color: #f9f6f2;
+  background: #edc53f;
+  /* font size */
+}
+.twentyfortyeight {
+  color: #f9f6f2;
+  background: #edc22e;
+  /* font size */
 }

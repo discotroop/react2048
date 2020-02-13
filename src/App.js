@@ -28,49 +28,37 @@ class Tile extends React.Component {
     switch(count) {
       case 2:
       result = "two";
-      console.log(result)
       break;
-
       case 4:
       result = "four";
       break; 
-
       case 8:
         result = "eight";
       break;
-
       case 16:
         result = "sixteen";
       break;
-
       case 32:
         result = "thirtytwo";
       break;
-
       case 64:
         result = "sixtyfour";
       break;
-
       case 128:
         result = "onetwentyeight";
       break;
-
       case 256:
         result = "twofiftysix";
       break;
-
       case 512:
         result = "fivetwelve";
       break;
-
       case 1024:
         result = "tentwofour";
       break;
-
       case 2048:
         result = "2048";
       break;
-      
       default: 
       result = "zero"
       break;
