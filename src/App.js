@@ -103,11 +103,43 @@ class GameBox extends React.Component {
       </div>
     )
   }
+  totalCount() {
+    let total = []
+    this.props.game.board.boardMap.forEach((arr) => {
+      arr.forEach((tile) => {
+        if (tile.count > 0) {
+          total+= tile.count;
+        }
+      })
+    })
+    return total;
+  }
+  // this works partially but still has problems, might have to write some tests
+  // dammit 
+  moveWasLegal(firstArr, secondArr) {
+    let legalMove = false;
+    for (let i = 0; i < firstArr.length; i++) {
+      if (firstArr[i].count !== secondArr[i].count) {
+        legalMove = true;
+        return legalMove;
+      }
+    }
+    return legalMove;
+  }
+
   up () {
+    let first = this.props.game.getTileList();
+
     this.props.game.board.moveTileUp();
+    
+    let second = this.props.game.getTileList()
+    if (this.moveWasLegal(first, second) === false) {
+      return;
+    } else {
     this.props.game.placeTile();
     this.setState(state => ({
     }))
+    }
   }
   down () {
     this.props.game.board.moveTileDown();
@@ -116,7 +148,15 @@ class GameBox extends React.Component {
     }))
   }
   left () {
+    let first = this.props.game.getTileList();
+
     this.props.game.board.moveTileLeft();
+    
+    let second = this.props.game.getTileList()
+    if (this.moveWasLegal(first, second) === false) {
+      return;
+    }
+
     this.props.game.placeTile();
     this.setState(state => ({
     }))

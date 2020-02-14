@@ -22,6 +22,15 @@ function Game () {
             }
             return result;
         },
+        getTileList: function () {
+            let list = []
+            this.board.boardMap.forEach((arr) => {
+                arr.forEach((tile) => {
+                    list.push(tile);
+                })
+            })
+            return list; 
+        },
         placeTile: function () {
             let x = this.random();
             let y = this.random();
@@ -110,7 +119,6 @@ function Game () {
             }
             return false;
         },
-
         /* end move checks */
         filterTiles: function () {
             let tiles = []
