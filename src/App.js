@@ -124,28 +124,38 @@ class GameBox extends React.Component {
         return legalMove;
       }
     }
+    console.log(legalMove)
     return legalMove;
   }
+  updateBoard() {
+    this.setState(state => ({}));
+  }
 
+  // these have become redunant with expansion, fix in refactor.
   up () {
     let first = this.props.game.getTileList();
-
     this.props.game.board.moveTileUp();
-    
-    let second = this.props.game.getTileList()
+    let second = this.props.game.getTileList();
     if (this.moveWasLegal(first, second) === false) {
+      this.updateBoard();
       return;
     } else {
     this.props.game.placeTile();
-    this.setState(state => ({
-    }))
+    this.updateBoard();
     }
   }
   down () {
+    let first = this.props.game.getTileList();
     this.props.game.board.moveTileDown();
+    let second = this.props.game.getTileList();
+
+    if (this.moveWasLegal(first, second) === false) {
+      this.updateBoard();
+      return;
+    } else {
     this.props.game.placeTile();
-    this.setState(state => ({
-    }))
+    this.updateBoard();
+    }
   }
   left () {
     let first = this.props.game.getTileList();
@@ -154,18 +164,24 @@ class GameBox extends React.Component {
     
     let second = this.props.game.getTileList()
     if (this.moveWasLegal(first, second) === false) {
+      this.updateBoard() 
       return;
+    } else {
+      this.props.game.placeTile();
+      this.updateBoard();
     }
-
-    this.props.game.placeTile();
-    this.setState(state => ({
-    }))
   }
   right () {
+    let first = this.props.game.getTileList();
     this.props.game.board.moveTileRight();
-    this.props.game.placeTile();
-    this.setState(state => ({
-    }))
+    let second = this.props.game.getTileList();
+    if (this.moveWasLegal(first, second) === false) {
+      this.updateBoard();
+      return;
+    } else {
+      this.props.game.placeTile();
+      this.updateBoard();
+    }
   }
   handleKeyPress = (key) => {
     if (this.props.game.hasLost() === true)
