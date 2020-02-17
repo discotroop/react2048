@@ -19,10 +19,18 @@
   justify-content: center;
   align-content: center;
 }
+.invisible {
+  display: none;
+}
 
 .endGame {
   opacity: 100%;
   background-color: white;
+  margin-top: 0px;
+  padding: 30px;
+  align-content: center;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .gamebox {
@@ -47,7 +55,7 @@
   background-color: #eee4da;
   border-radius: 3px;
 }
-.header button {
+button {
   height: 60px;
   background-color: #f2b179;
   border-style: solid;

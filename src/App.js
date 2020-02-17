@@ -1,14 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
-// import Board from './components/Board.js'
 import Game from './components/game.js'
-import Modal from 'react-modal';
 
 const game = Game()
 let board = game.board;
-
-Modal.setAppElement(document.querySelector(".gamebox"))
 
 function App() {
   return (
@@ -85,22 +80,9 @@ class GameBox extends React.Component {
       game: props.game,
       board: game.board,
       test: "react 2048",
-      modalIsOpen: false,
+      gameOver: "Lost",
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-  openModal() {
-    this.setState({modalIsOpen: true});
-    console.log(this.state.modalIsOpen)
-  }
-  afterOpenModal() {
-    console.log("put stuff here");
-  }
-  closeModal() {
-    this.setState({modalIsOpen: false})
   }
   drawBoard() {
     let tileArr = []
@@ -141,7 +123,6 @@ class GameBox extends React.Component {
         return legalMove;
       }
     }
-    console.log(legalMove)
     return legalMove;
   }
   updateBoard() {
@@ -201,8 +182,10 @@ class GameBox extends React.Component {
     }
   }
   handleKeyPress = (key) => {
-    if (this.props.game.hasLost() === true)
-      {console.log("loser")
+    if (this.props.game.hasLost() === true) {
+      let modal = document.querySelector(".myModal");
+      modal.classList.remove("invisible")
+      this.setState({gameOver: "Lost"});
       return; }
     if (key === "ArrowUp") {
       this.up();
@@ -226,13 +209,20 @@ class GameBox extends React.Component {
   componentDidMount() {
     this.handleEvents();
   }
+  closeModal() {
+    this.newGame();
+    let modal = document.querySelector(".myModal")
+    modal.classList.add("invisible");
+  }
+
   render() {
     return (
     <div className="gamebox">
-      <div className="myModal"> modal
+      <div className="myModal invisible">
        <div className="endGame"> 
-       <h1> endgame </h1>
-        <button onClick={() => this.newGame()}> New Game </button>
+       <h1> Game Over! </h1>
+       <h3> You {this.state.gameOver} </h3> 
+        <button onClick={() => this.closeModal()}> New Game </button>
         </div>
          </div>
       <div className="header">
