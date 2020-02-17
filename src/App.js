@@ -182,8 +182,8 @@ class GameBox extends React.Component {
     }
   }
   handleKeyPress = (key) => {
+    let modal = document.querySelector(".myModal");
     if (this.props.game.hasLost() === true) {
-      let modal = document.querySelector(".myModal");
       modal.classList.remove("invisible")
       this.setState({gameOver: "Lost"});
       return; }
@@ -195,10 +195,15 @@ class GameBox extends React.Component {
       this.left();
     } else if (key === "ArrowRight") {
       this.right();
-    } else {
-      return;
+    } 
+    let victory = this.props.game.checkWin();
+    if (victory === 1) {
+      modal.classList.remove("invisible");
+      this.setState({gameOver: "Won!"})
     }
+    return;
   }
+
   handleEvents() {
     window.addEventListener('keydown' , (e) => this.handleKeyPress(e.key));
   }

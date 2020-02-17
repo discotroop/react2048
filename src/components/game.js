@@ -38,7 +38,7 @@ function Game () {
             if (tiles.length === 16) {
                 return;
             } else if (this.board.boardMap[x][y].count < 2) {
-                this.board.placeTile(x, y, Tile());
+                this.board.placeTile(x, y, Tile(1024));
             } else {
                 this.placeTile();
             }
