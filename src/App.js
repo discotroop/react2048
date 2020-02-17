@@ -1,10 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 // import Board from './components/Board.js'
 import Game from './components/game.js'
+import Modal from 'react-modal';
 
 const game = Game()
 let board = game.board;
+
+Modal.setAppElement('#root')
+const ModalStyles = {
+  overflow: 'hidden',
+  width: '50%',
+}
 
 function App() {
   return (
@@ -80,9 +88,23 @@ class GameBox extends React.Component {
     this.state = {
       game: props.game,
       board: game.board,
-      test: "react 2048"
+      test: "react 2048",
+      modalIsOpen: false,
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+  openModal() {
+    this.setState({modalIsOpen: true});
+    console.log(this.state.modalIsOpen)
+  }
+  afterOpenModal() {
+    console.log("put stuff here");
+  }
+  closeModal() {
+    this.setState({modalIsOpen: false})
   }
   drawBoard() {
     let tileArr = []
@@ -210,7 +232,23 @@ class GameBox extends React.Component {
   }
   render() {
     return (
-    <div className="gamebox"> 
+    <div className="gamebox">
+               <button onClick={this.openModal}> Open Modal </button>
+
+      <Modal
+        isOpen = {this.state.modalIsOpen}
+        onAfterOpen = {this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        className="Modal"
+        overlayClassName="Overlay"
+        contentLabel="testing Modal">
+      
+          
+          <div> hello modal </div>
+          <button onClick={this.closeModal}> close </button>
+          {console.log("opened")}
+
+          </Modal> 
       <div className="header">
         <div className="game-title">  2048 </div>
         <div> <button onClick={() => this.newGame()}> New Game  </button></div>
@@ -219,6 +257,8 @@ class GameBox extends React.Component {
       
        <div>
        {this.drawBoard()}
+       </div>
+       <div> 
        </div>
     </div>
   
