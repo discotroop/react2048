@@ -1,31 +1,18 @@
-OK... what actually needs to happen here. 
+My take on the infamous 2048 game.
 
-2.12.2020:
-1. finish end game conditions
-    <!-- a. stop displaying zero on empty tiles;
-        -- just match it to the background color: -->
-    b .
-2. scale fonts
-3. style CSS
-    <!-- a. needs to by dynamic based on number -->
-    b. needs to scale out edge when numbers add
+You can see a demo of this project here (#add demo);
+You can play around with the up to day product here (#add link)
 
-4. need a modal for game lost/game won
-5. need a score keeper? 
-    => counter added but does not display;
-6. need to score top score in local storage ? 
-7. NEED to refactor and clean up code .
+Things I would still like to add.
+- More CSS styles/animations to make the feel smoother
+- Font's scaling with the boxes
+- Responsive/Mobile friendly design.
 
-8. bugs  bugs bugs
+- A general refactor of the game logic and sorting of things in a more sensible way.
+- Better test coverage, it would have saved quite few headaches along the way.
 
-RESOLVE PROBLEM WITH LEGAL MOVES:
-
-
-0 2 4 8 16 32 
-64 128 256 512 1024 
-2048
-
-might be time for a switch statement.
+Tools Used:
+JS, React, HTML 5, CSS, Jest, Git (obviously).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
