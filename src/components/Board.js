@@ -108,7 +108,6 @@ return {
             workingArr[i].reverse();
         }
         this.boardMap = this.makeVerticalRows(workingArr);
-        console.log(this.boardMap)
         return this.boardMap;
     },
 }

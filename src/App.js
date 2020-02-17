@@ -9,7 +9,6 @@ let board = game.board;
 function App() {
   return (
     <div className="App">
-      <div> testing </div>
       <GameBox game={game} board={board}> </GameBox>
     </div>
   );
@@ -104,7 +103,7 @@ class GameBox extends React.Component {
     )
   }
   totalCount() {
-    let total = []
+    let total = 0;
     this.props.game.board.boardMap.forEach((arr) => {
       arr.forEach((tile) => {
         if (tile.count > 0) {
@@ -202,14 +201,22 @@ class GameBox extends React.Component {
   handleEvents() {
     window.addEventListener('keydown' , (e) => this.handleKeyPress(e.key));
   }
+  newGame() {
+    this.props.game.newGame();
+    this.updateBoard();
+  }
   componentDidMount() {
     this.handleEvents();
   }
   render() {
     return (
-    <div> 
-      <div>  hello
-       </div>
+    <div className="gamebox"> 
+      <div className="header">
+        <div>  hello </div>
+        <div> <button onClick={() => this.newGame()}> New Game  </button></div>
+        <div> {this.totalCount()} </div>
+      </div>
+      
        <div>
        {this.drawBoard()}
        </div>
