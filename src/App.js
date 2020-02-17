@@ -212,9 +212,9 @@ class GameBox extends React.Component {
     return (
     <div className="gamebox"> 
       <div className="header">
-        <div>  hello </div>
+        <div className="game-title">  2048 </div>
         <div> <button onClick={() => this.newGame()}> New Game  </button></div>
-        <div> {this.totalCount()} </div>
+        <div className="score"> {this.totalCount()}</div>
       </div>
       
        <div>

@@ -7,7 +7,36 @@
   width: 400px;
   padding: 10px;
   border-radius: 3px;
+}
 
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin-top: 10px;
+}
+.game-title {
+  line-height: 60px;
+  font-size: 50px;
+  background-color: #eee4da;
+  border-radius: 3px;
+}
+.header button {
+  height: 60px;
+  background-color: #f2b179;
+  border-style: solid;
+  border-color: #f2b179;
+  border-radius: 3px;
+}
+.score {
+  background-color: #bbada0;
+  border-radius: 3px;
+  font-size: 30px;
+  height: 60px;
+  line-height: 60px;
 }
 
 .board {
