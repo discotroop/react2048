@@ -8,11 +8,7 @@ import Modal from 'react-modal';
 const game = Game()
 let board = game.board;
 
-Modal.setAppElement('#root')
-const ModalStyles = {
-  overflow: 'hidden',
-  width: '50%',
-}
+Modal.setAppElement(document.querySelector(".gamebox"))
 
 function App() {
   return (
@@ -233,22 +229,12 @@ class GameBox extends React.Component {
   render() {
     return (
     <div className="gamebox">
-               <button onClick={this.openModal}> Open Modal </button>
-
-      <Modal
-        isOpen = {this.state.modalIsOpen}
-        onAfterOpen = {this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        className="Modal"
-        overlayClassName="Overlay"
-        contentLabel="testing Modal">
-      
-          
-          <div> hello modal </div>
-          <button onClick={this.closeModal}> close </button>
-          {console.log("opened")}
-
-          </Modal> 
+      <div className="myModal"> modal
+       <div className="endGame"> 
+       <h1> endgame </h1>
+        <button onClick={() => this.newGame()}> New Game </button>
+        </div>
+         </div>
       <div className="header">
         <div className="game-title">  2048 </div>
         <div> <button onClick={() => this.newGame()}> New Game  </button></div>
