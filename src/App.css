@@ -23,6 +23,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 3px;
+  border-color: black;
 }
 
 .testState {
