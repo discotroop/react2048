@@ -22,7 +22,6 @@
 .invisible {
   display: none;
 }
-
 .endGame {
   opacity: 100%;
   background-color: white;
@@ -32,14 +31,12 @@
   text-align: center;
   border-radius: 5px;
 }
-
 .gamebox {
   background-color: #776e65;
   width: 400px;
   padding: 10px;
   border-radius: 3px;
 }
-
 .header {
   display: grid;
   grid-template-columns: repeat(3, 120px);
@@ -69,7 +66,6 @@ button {
   height: 60px;
   line-height: 60px;
 }
-
 .board {
   background-color: #776e65;;
   display: grid;
@@ -84,7 +80,6 @@ button {
   text-align: center;
   border-radius: 3px;
 }
-
 .tile {
   background-color: #bbada0;
   min-height: 40px;
@@ -96,7 +91,6 @@ button {
   border-radius: 3px;
   border-color: black;
 }
-
 .testState {
   width: 40px;
   height: 40px;
@@ -104,7 +98,6 @@ button {
   text-align: center;
   font-weight: 20px;
 }
-
 .zero {
   /* color: #776e65; */
   color: #bbada0;
@@ -147,7 +140,7 @@ button {
   background: #edc850;
   /* change font size  */
 }
-.tentwentyfour {
+.tentwofour {
   color: #f9f6f2;
   background: #edc53f;
   /* font size */

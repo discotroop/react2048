@@ -55,7 +55,7 @@ class Tile extends React.Component {
         result = "tentwofour";
       break;
       case 2048:
-        result = "2048";
+        result = "twentyfortyeight";
       break;
       default: 
       result = "zero"
@@ -63,7 +63,6 @@ class Tile extends React.Component {
     }
     return result;
   }
-
   setClassNames() {
     let result = "tile " + this.findTileStyle();
     return result;
@@ -128,7 +127,6 @@ class GameBox extends React.Component {
   updateBoard() {
     this.setState(state => ({}));
   }
-
   // these have become redunant with expansion, fix in refactor.
   up () {
     let first = this.props.game.getTileList();
@@ -203,7 +201,6 @@ class GameBox extends React.Component {
     }
     return;
   }
-
   handleEvents() {
     window.addEventListener('keydown' , (e) => this.handleKeyPress(e.key));
   }
@@ -219,7 +216,6 @@ class GameBox extends React.Component {
     let modal = document.querySelector(".myModal")
     modal.classList.add("invisible");
   }
-
   render() {
     return (
     <div className="gamebox">
