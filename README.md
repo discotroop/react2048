@@ -1,6 +1,5 @@
 My take on the infamous 2048 game.
 
-You can see a demo of this project here (#add demo);
 You can play around with the game here: (https://discotroop.github.io/react2048/)
 
 Things I would still like to add.
@@ -12,9 +11,9 @@ Things I would still like to add.
 - Better test coverage, it would have saved quite few headaches along the way.
 
 Tools Used:
-JS, React, HTML 5, CSS, Jest, Git (obviously), github pages.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+JS, React, HTML 5, CSS.
+Jest for testing
+Git, github pages for back up and deployment.
 
 If you'd like to run it locally feel free to download the repository.
 
